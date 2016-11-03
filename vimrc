@@ -28,7 +28,7 @@ set cmdheight=2
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -65,8 +65,15 @@ set statusline +=%{&ff}                     "file format
 set statusline +=%y                         "file type
 set statusline +=\ %<%F                     "full path
 set statusline +=%m                         "modified flag
-set statusline +=\ %=\ line:%l/%L\ (%p%%)    "line out of total
-set statusline +=\ column:%v                   "column
+set statusline +=\ \ \ \ \%#todo#<F2>%*Line\ \Numbers
+set statusline +=%#todo#<F3>%*Paste\ \Mode
+set statusline +=%#todo#<F4>%*Save
+set statusline +=%#todo#<F5>%*Make
+set statusline +=%#todo#<F6>%*Search\ \Files
+set statusline +=%#todo#<F7>%*Search\ \Highlight
+set statusline +=%#todo#<F8>%*Jump\ \To\ \Header
+set statusline +=\ %=\ line:%l/%L\ (%p%%)   "line out of total
+set statusline +=\ column:%v                "column
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -88,4 +95,38 @@ set pastetoggle=<F3>
 
 " save file with F4
 map <F4> :w! <CR>
+
+" Open Quickfix window automatically after running :make
+augroup OpenQuickfixWindowAfterMake
+    autocmd QuickFixCmdPost [^l]* nested cwindow
+    autocmd QuickFixCmdPost    l* nested lwindow
+augroup END
+
+" make file with F5
+map <F5> :make <CR>
+
+" search for the word under the cusrsor
+map <F6> :execute "vimgrep /" . expand("<cword>") . "/j **/*.cpp **/*.h" <Bar> cw<CR>
+
+" toggle search highlight
+set hlsearch
+nnoremap <F7> :set hlsearch!<CR>
+
+" jump between cpp/h file base on https://github.com/derekwyatt/vim-fswitch
+map <F8> :FSHere <CR>
+
+" allow use of functions and aliases in vim
+set shell=bash\ --login
+
+" call svmk for make
+set makeprg=svmk
+
+" global search by default
+set gdefault
+
+" dynamic search
+set incsearch
+
+" make sure syntax is on after buffer delete
+let g:miniBufExplForceSyntaxEnable = 1
 
