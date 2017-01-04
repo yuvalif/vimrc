@@ -124,6 +124,6 @@ set gdefault
 " dynamic search
 set incsearch
 
-" make sure syntax is on after buffer delete
+" make sure syntax is on after buffer delete. minibuffer explorer: https://github.com/fholgado/minibufexpl.vim
 let g:miniBufExplForceSyntaxEnable = 1
 
