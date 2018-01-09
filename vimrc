@@ -115,9 +115,6 @@ map <F8> :FSHere <CR>
 " allow use of functions and aliases in vim
 set shell=bash\ --login
 
-" call svmk for make
-set makeprg=svmk
-
 " global search by default
 set gdefault
 
@@ -126,4 +123,19 @@ set incsearch
 
 " make sure syntax is on after buffer delete. minibuffer explorer: https://github.com/fholgado/minibufexpl.vim
 let g:miniBufExplForceSyntaxEnable = 1
+" have the buffer window on the left
+let g:miniBufExplVSplit = 40   " column width in chars
+
+" make difftool more readable
+if &diff
+    colorscheme evening
+endif
+
+" fixing some common typos
+ca Q q
+ca X x
+ca XA xa
+ca Xa xa
+ca QA qa
+ca Qa qa
 
