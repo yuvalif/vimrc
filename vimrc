@@ -10,6 +10,9 @@ set history=200
 filetype plugin on
 filetype indent on
 
+" turn on syntax highlight
+syntax on
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -111,6 +114,7 @@ nnoremap <F7> :set hlsearch!<CR>
 
 " jump between cpp/h file base on https://github.com/derekwyatt/vim-fswitch
 map <F8> :FSHere <CR>
+let g:fsnonewfiles=1
 
 " allow use of functions and aliases in vim
 set shell=bash\ --login
