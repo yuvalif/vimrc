@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -d  ~/.vim/ ]; then
+    mkdir ~/.vim/
+fi
+
 if [ ! -d  ~/.vim/plugin/ ]; then
     mkdir ~/.vim/plugin/
 fi

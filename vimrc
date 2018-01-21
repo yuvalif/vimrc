@@ -65,13 +65,6 @@ set statusline +=%{&ff}                     "file format
 set statusline +=%y                         "file type
 set statusline +=\ %<%F                     "full path
 set statusline +=%m                         "modified flag
-set statusline +=\ \ \ \ \%#todo#<F2>%*Line\ \Numbers
-set statusline +=%#todo#<F3>%*Paste\ \Mode
-set statusline +=%#todo#<F4>%*Save
-set statusline +=%#todo#<F5>%*Make
-set statusline +=%#todo#<F6>%*Search\ \Files
-set statusline +=%#todo#<F7>%*Search\ \Highlight
-set statusline +=%#todo#<F8>%*Jump\ \To\ \Header
 set statusline +=\ %=\ line:%l/%L\ (%p%%)   "line out of total
 set statusline +=\ column:%v                "column
 
@@ -93,20 +86,11 @@ inoremap <F2> <C-O>:set invnumber<CR>
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
 
-" save file with F4
-map <F4> :w! <CR>
-
 " Open Quickfix window automatically after running :make
 augroup OpenQuickfixWindowAfterMake
     autocmd QuickFixCmdPost [^l]* nested cwindow
     autocmd QuickFixCmdPost    l* nested lwindow
 augroup END
-
-" make file with F5
-map <F5> :make <CR>
-
-" search for the word under the cusrsor
-map <F6> :execute "vimgrep /" . expand("<cword>") . "/j **/*.cpp **/*.h" <Bar> cw<CR>
 
 " toggle search highlight
 set hlsearch
