@@ -127,3 +127,14 @@ ca Xa xa
 ca QA qa
 ca Qa qa
 
+" prevent error bells
+set noerrorbells visualbell t_vb=
+
+" spell check
+set spelllang=en
+set spellfile=$HOME/vimrc/en.utf-8.add
+
+" toggle spelling
+nnoremap <F9> :set spell!<CR> :syn spell toplevel<CR>
+imap <F9> <C-O><F9>
+
