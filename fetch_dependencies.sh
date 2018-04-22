@@ -1,28 +1,56 @@
 #!/bin/bash
 
-if [ ! -d  ~/.vim/ ]; then
-    mkdir ~/.vim/
-fi
+BASE_DIR=~/.vim/pack/yuvalif/start
 
-if [ ! -d  ~/.vim/plugin/ ]; then
-    mkdir ~/.vim/plugin/
-fi
+mkdir -p $BASE_DIR
 
-if [ ! -d  ~/vimrc/vim-fswitch ]; then
+
+# fswitch: jump from implementation to header
+if [ ! -d  $BASE_DIR/vim-fswitch ]; then
+    cd $BASE_DIR
     git clone https://github.com/derekwyatt/vim-fswitch.git
-    ln -s ~/vimrc/vim-fswitch/plugin/fswitch.vim ~/.vim/plugin/fswitch.vim
 else
-    cd  ~/vimrc/vim-fswitch
+    cd  $BASE_DIR/vim-fswitch
     git pull
-    cd -
 fi
 
-if [ ! -d  ~/vimrc/minibufexpl.vim ]; then
+cd - > /dev/null
+
+# minimal buffer explorer
+if [ ! -d  $BASE_DIR/minibufexpl.vim ]; then
+    cd $BASE_DIR
     git clone https://github.com/fholgado/minibufexpl.vim.git
-    ln -s ~/vimrc/minibufexpl.vim/plugin/minibufexpl.vim ~/.vim/plugin/minibufexpl.vim
 else
-    cd  ~/vimrc/minibufexpl.vim
+    cd  $BASE_DIR/minibufexpl.vim
     git pull
-    cd -
 fi
+
+cd - > /dev/null
+
+# tag window
+if [ ! -d  $BASE_DIR/tagbar ]; then
+    cd $BASE_DIR
+    git clone https://github.com/majutsushi/tagbar.git
+else
+    cd  $BASE_DIR/tagbar
+    git pull
+fi
+
+# YCM auto-completion
+if [ ! -d  $BASE_DIR/YouCompleteMe ]; then
+    cd $BASE_DIR
+    git clone https://github.com/Valloric/YouCompleteMe
+    sudo dnf install automake gcc gcc-c++ kernel-devel cmake
+    sudo dnf install python-devel python3-devel
+    git submodule update --init --recursive
+else
+    cd  $BASE_DIR/YouCompleteMe
+    git pull
+fi
+
+# build YCM
+# TODO: only if newly cloned or git pull updated anything
+./install.py --clang-completer --go-completer
+
+cd - > /dev/null
 

@@ -70,9 +70,9 @@ set statusline +=\ column:%v                "column
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
 
 " Remember info about open buffers on close
 set viminfo^=%
@@ -137,4 +137,53 @@ set spellfile=$HOME/vimrc/en.utf-8.add
 " toggle spelling
 nnoremap <F9> :set spell!<CR> :syn spell toplevel<CR>
 imap <F9> <C-O><F9>
+
+" always look for all tags using c-[
+nmap <C-]> g<C-]>
+
+" search up for tags file
+set tags=./tags;/
+
+" toggele tagbar
+nmap <F6> :TagbarToggle<CR>
+
+" tagbar for golang based on gotags
+let g:tagbar_type_go = {
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
+
+
+" toggele file explorer
+nmap <F5> :Explore<CR>
+
+" prevent YCM preview window
+set completeopt-=preview
+
+" NERDtree like setup of built in netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 
