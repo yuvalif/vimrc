@@ -40,17 +40,28 @@ fi
 if [ ! -d  $BASE_DIR/YouCompleteMe ]; then
     cd $BASE_DIR
     git clone https://github.com/Valloric/YouCompleteMe
-    sudo dnf install automake gcc gcc-c++ kernel-devel cmake
-    sudo dnf install python-devel python3-devel
+    sudo dnf install -y automake gcc gcc-c++ kernel-devel cmake
+    sudo dnf install -y python-devel python3-devel
+    cd  $BASE_DIR/YouCompleteMe
     git submodule update --init --recursive
 else
     cd  $BASE_DIR/YouCompleteMe
     git pull
+    git submodule update --init --recursive
 fi
 
 # build YCM
 # TODO: only if newly cloned or git pull updated anything
 ./install.py --clang-completer --go-completer
-
+# TODO: build YCM fo C/C++
 cd - > /dev/null
+
+# Git
+if [ ! -d  $BASE_DIR/vim-gitgutter ]; then
+    cd $BASE_DIR
+    git clone git://github.com/airblade/vim-gitgutter.git
+else
+    cd  $BASE_DIR/vim-gitgutter
+    git pull
+fi
 
