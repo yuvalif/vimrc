@@ -52,7 +52,7 @@ fi
 
 # build YCM
 # TODO: only if newly cloned or git pull updated anything
-./install.py --clang-completer --go-completer
+#./install.py --clang-completer --go-completer
 # TODO: build YCM fo C/C++
 cd - > /dev/null
 
@@ -62,6 +62,15 @@ if [ ! -d  $BASE_DIR/vim-gitgutter ]; then
     git clone git://github.com/airblade/vim-gitgutter.git
 else
     cd  $BASE_DIR/vim-gitgutter
+    git pull
+fi
+
+# status line
+if [ ! -d  $BASE_DIR/vim-airline ]; then
+    cd $BASE_DIR
+    git clone https://github.com/vim-airline/vim-airline.git
+else
+    cd  $BASE_DIR/vim-airline
     git pull
 fi
 
