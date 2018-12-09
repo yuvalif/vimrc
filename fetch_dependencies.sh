@@ -4,7 +4,6 @@ BASE_DIR=~/.vim/pack/yuvalif/start
 
 mkdir -p $BASE_DIR
 
-
 # fswitch: jump from implementation to header
 if [ ! -d  $BASE_DIR/vim-fswitch ]; then
     cd $BASE_DIR
@@ -14,8 +13,6 @@ else
     git pull
 fi
 
-cd - > /dev/null
-
 # minimal buffer explorer
 if [ ! -d  $BASE_DIR/minibufexpl.vim ]; then
     cd $BASE_DIR
@@ -24,8 +21,6 @@ else
     cd  $BASE_DIR/minibufexpl.vim
     git pull
 fi
-
-cd - > /dev/null
 
 # tag window
 if [ ! -d  $BASE_DIR/tagbar ]; then
@@ -41,6 +36,7 @@ if [ ! -d  $BASE_DIR/YouCompleteMe ]; then
     cd $BASE_DIR
     git clone https://github.com/Valloric/YouCompleteMe
     sudo dnf install -y automake gcc gcc-c++ kernel-devel cmake
+    sudo dnf install -y go
     sudo dnf install -y python-devel python3-devel
     cd  $BASE_DIR/YouCompleteMe
     git submodule update --init --recursive
@@ -52,9 +48,13 @@ fi
 
 # build YCM
 # TODO: only if newly cloned or git pull updated anything
-#./install.py --clang-completer --go-completer
-# TODO: build YCM fo C/C++
-cd - > /dev/null
+./install.py --clang-completer --go-completer
+
+# YCM generator
+if [ ! -d  $BASE_DIR/YCM-Generator ]; then
+    cd $BASE_DIR
+    git clone https://github.com/rdnetto/YCM-Generator.git
+fi
 
 # Git
 if [ ! -d  $BASE_DIR/vim-gitgutter ]; then
@@ -65,12 +65,28 @@ else
     git pull
 fi
 
+if [ ! -d  $BASE_DIR/vim-fugitive ]; then
+    cd $BASE_DIR
+    git clone https://github.com/tpope/vim-fugitive
+else
+    cd  $BASE_DIR/vim-fugitive
+    git pull
+fi
+
 # status line
 if [ ! -d  $BASE_DIR/vim-airline ]; then
     cd $BASE_DIR
     git clone https://github.com/vim-airline/vim-airline.git
 else
     cd  $BASE_DIR/vim-airline
+    git pull
+fi
+
+if [ ! -d  $BASE_DIR/vim-airline-themes ]; then
+    cd $BASE_DIR
+    git clone https://github.com/vim-airline/vim-airline-themes.git
+else
+    cd  $BASE_DIR/vim-airline-themes
     git pull
 fi
 

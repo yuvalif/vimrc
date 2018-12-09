@@ -58,16 +58,6 @@ set si "Smart indent
 " Always show the status line
 set laststatus=2
 
-" Format the status line
-set statusline=
-set statusline +=\ %n\                      "buffer number
-set statusline +=%{&ff}                     "file format
-set statusline +=%y                         "file type
-set statusline +=\ %<%F                     "full path
-set statusline +=%m                         "modified flag
-set statusline +=\ %=\ line:%l/%L\ (%p%%)   "line out of total
-set statusline +=\ column:%v                "column
-
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -96,9 +86,16 @@ augroup END
 set hlsearch
 nnoremap <F7> :set hlsearch!<CR>
 
+" fswitch configuration
 " jump between cpp/h file base on https://github.com/derekwyatt/vim-fswitch
 map <F8> :FSHere <CR>
+" dont generate missing files
 let g:fsnonewfiles=1
+" define basic behavior
+au! BufEnter *.c let b:fswitchdst = 'h' | let b:fswitchlocs = '.,../inc,../include,./include,./include/*'
+au! BufEnter *.c* let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,../inc,../include,./include,./include/*'
+au! BufEnter *.h let b:fswitchdst = 'c,cpp,cc,cxx' | let b:fswitchlocs = '.,../src,..,../..'
+au! BufEnter *.hpp let b:fswitchdst = 'cpp,cc,cxx' | let b:fswitchlocs = '.,../src,..,../..'
 
 " allow use of functions and aliases in vim
 set shell=bash\ --login
@@ -114,9 +111,22 @@ let g:miniBufExplForceSyntaxEnable = 1
 " have the buffer window on the left
 let g:miniBufExplVSplit = 40   " column width in chars
 
-" make difftool more readable
 if &diff
+    " make difftool more readable
     colorscheme evening
+    " allow easy merging using:
+    " Ctr-1 select LOCAL
+    " Ctr-2 select BASE
+    " Cat-3 select REMOTE
+    nnoremap <buffer> <C-1> :diffget LOCAL<CR>
+    nnoremap <buffer> <C-2> :diffget BASE<CR>
+    nnoremap <buffer> <C-3> :diffget REMOTE<CR>
+    " look for next/prev diff
+    nnoremap <buffer> ] ]c
+    nnoremap <buffer> [ [c
+    " look for next/prev conflict
+    noremap <buffer> } /<<<<<<<<CR>
+    noremap <buffer> { ?<<<<<<<<CR>
 endif
 
 " fixing some common typos
@@ -180,10 +190,23 @@ let g:tagbar_type_go = {
 " toggele file explorer
 nmap <F5> :Explore<CR>
 
+" YCM conf
 " prevent YCM preview window
 set completeopt-=preview
+let g:ycm_global_ycm_extra_conf = '~/vimrc/.ycm_extra_conf.py'
+" load ycm conf by default
+let g:ycm_confirm_extra_conf=0
+"" don't cache completion items
+let g:ycm_cache_omnifunc=0
+"" complete syntax keywords
+let g:ycm_seed_identifiers_with_syntax=1
 
 " NERDtree like setup of built in netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
+" handle conf files as ini files
+au BufEnter,BufRead *.conf setf dosini
+
+" airline
+let g:airline#extensions#whitespace#enabled = 0
