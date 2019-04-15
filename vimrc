@@ -76,6 +76,13 @@ inoremap <F2> <C-O>:set invnumber<CR>
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
 
+" search in files
+nmap <F4> :Ack <C-R><C-W> ../src/ <CR>
+" use ag instead of ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep -u -p ../.agignore'
+endif
+
 " Open Quickfix window automatically after running :make
 augroup OpenQuickfixWindowAfterMake
     autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -110,6 +117,9 @@ set incsearch
 let g:miniBufExplForceSyntaxEnable = 1
 " have the buffer window on the left
 let g:miniBufExplVSplit = 40   " column width in chars
+
+" needed for colors to play well with tmux
+set background=dark
 
 if &diff
     " make difftool more readable
@@ -154,46 +164,12 @@ nmap <C-]> g<C-]>
 " search up for tags file
 set tags=./tags;/
 
-" toggele tagbar
-nmap <F6> :TagbarToggle<CR>
-
-" tagbar for golang based on gotags
-let g:tagbar_type_go = {
-            \ 'ctagstype' : 'go',
-            \ 'kinds'     : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-            \ ],
-            \ 'sro' : '.',
-            \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-            \ },
-            \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-            \ },
-            \ 'ctagsbin'  : 'gotags',
-            \ 'ctagsargs' : '-sort -silent'
-            \ }
-
-
 " toggele file explorer
 nmap <F5> :Explore<CR>
 
 " YCM conf
 " prevent YCM preview window
 set completeopt-=preview
-let g:ycm_global_ycm_extra_conf = '~/vimrc/.ycm_extra_conf.py'
 " load ycm conf by default
 let g:ycm_confirm_extra_conf=0
 "" don't cache completion items
@@ -210,3 +186,9 @@ au BufEnter,BufRead *.conf setf dosini
 
 " airline
 let g:airline#extensions#whitespace#enabled = 0
+
+" ALE for python
+let b:ale_linters = ['pylint']
+let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
+let g:ale_completion_enabled = 1
+

@@ -22,15 +22,6 @@ else
     git pull
 fi
 
-# tag window
-if [ ! -d  $BASE_DIR/tagbar ]; then
-    cd $BASE_DIR
-    git clone https://github.com/majutsushi/tagbar.git
-else
-    cd  $BASE_DIR/tagbar
-    git pull
-fi
-
 # YCM auto-completion
 if [ ! -d  $BASE_DIR/YouCompleteMe ]; then
     cd $BASE_DIR
@@ -87,6 +78,17 @@ if [ ! -d  $BASE_DIR/vim-airline-themes ]; then
     git clone https://github.com/vim-airline/vim-airline-themes.git
 else
     cd  $BASE_DIR/vim-airline-themes
+    git pull
+fi
+
+# search tools
+if [ ! -d  $BASE_DIR/ack.vim ]; then
+    cd $BASE_DIR
+    git clone https://github.com/mileszs/ack.vim.git
+    sudo dnf install -y ack
+    sudo dnf install -y the_silver_searcher
+else
+    cd  $BASE_DIR/ack.vim
     git pull
 fi
 
