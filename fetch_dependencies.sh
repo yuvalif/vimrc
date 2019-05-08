@@ -92,3 +92,11 @@ else
     git pull
 fi
 
+# ale - async linter
+if [ ! -d  $BASE_DIR/ale ]; then
+    cd $BASE_DIR
+    git clone https://github.com/w0rp/ale
+else
+    cd  $BASE_DIR/ale
+    git pull
+fi
