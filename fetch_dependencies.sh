@@ -96,6 +96,8 @@ fi
 if [ ! -d  $BASE_DIR/ale ]; then
     cd $BASE_DIR
     git clone https://github.com/w0rp/ale
+    sudo dnf install -y ShellCheck
+    sudo pip install pylint
 else
     cd  $BASE_DIR/ale
     git pull

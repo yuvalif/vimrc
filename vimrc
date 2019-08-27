@@ -80,8 +80,9 @@ set pastetoggle=<F3>
 nmap <F4> :Ack <C-R><C-W> ../src/ <CR>
 " use ag instead of ack
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep -u -p ../.agignore'
+  let g:ackprg = 'ag --vimgrep --ignore tags'
 endif
+let g:ackhighlight = 1
 
 " Open Quickfix window automatically after running :make
 augroup OpenQuickfixWindowAfterMake
@@ -123,7 +124,7 @@ set background=dark
 
 if &diff
     " make difftool more readable
-    colorscheme evening
+    colorscheme murphy
     " allow easy merging using:
     " Ctr-1 select LOCAL
     " Ctr-2 select BASE
@@ -187,8 +188,8 @@ au BufEnter,BufRead *.conf setf dosini
 " airline
 let g:airline#extensions#whitespace#enabled = 0
 
-" ALE for python
-let b:ale_linters = ['pylint']
+" ALE for python and bash
+let b:ale_linters = ['pylint', 'shellcheck']
 let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 let g:ale_completion_enabled = 1
-
+let g:ale_lint_on_text_changed = 'never'
