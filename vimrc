@@ -190,6 +190,6 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " ALE for python and bash
 let b:ale_linters = ['pylint', 'shellcheck']
-let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
+"let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 'never'
