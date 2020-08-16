@@ -67,3 +67,10 @@ s3
 timestamp
 attrs
 AWS
+radosgw
+xattrs
+librados
+async
+bufferlist
+cls
+init

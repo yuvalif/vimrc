@@ -48,9 +48,9 @@ set noswapfile
 " Use spaces instead of tabs
 set expandtab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
 
 set ai "Auto indent
 set si "Smart indent
@@ -76,8 +76,6 @@ inoremap <F2> <C-O>:set invnumber<CR>
 nnoremap <F3> :set invpaste paste?<CR>
 set pastetoggle=<F3>
 
-" search in files
-nmap <F4> :Ack <C-R><C-W> ../src/ <CR>
 " use ag instead of ack
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --ignore tags'
@@ -96,9 +94,10 @@ nnoremap <F7> :set hlsearch!<CR>
 
 " fswitch configuration
 " jump between cpp/h file base on https://github.com/derekwyatt/vim-fswitch
-map <F8> :FSHere <CR>
+nnoremap <F8> :FSHere<CR>
 " dont generate missing files
 let g:fsnonewfiles=1
+let g:fsdisablegloc=1
 " define basic behavior
 au! BufEnter *.c let b:fswitchdst = 'h' | let b:fswitchlocs = '.,../inc,../include,./include,./include/*'
 au! BufEnter *.c* let b:fswitchdst = 'h,hpp' | let b:fswitchlocs = '.,../inc,../include,./include,./include/*'
@@ -114,10 +113,15 @@ set gdefault
 " dynamic search
 set incsearch
 
-" make sure syntax is on after buffer delete. minibuffer explorer: https://github.com/fholgado/minibufexpl.vim
+" minibuffer explorer: https://github.com/fholgado/minibufexpl.vim
+nnoremap <F5> :MBEToggle<CR>
+nnoremap <F6> :MBEFocus<CR>
+" make sure syntax is on after buffer delete. 
 let g:miniBufExplForceSyntaxEnable = 1
 " have the buffer window on the left
 let g:miniBufExplVSplit = 40   " column width in chars
+" no need to show numbers
+let g:miniBufExplShowBufNumbers = 0
 
 " needed for colors to play well with tmux
 set background=dark
@@ -166,17 +170,20 @@ nmap <C-]> g<C-]>
 set tags=./tags;/
 
 " toggele file explorer
-nmap <F5> :Explore<CR>
+nnoremap <F4> :Explore<CR>
 
 " YCM conf
 " prevent YCM preview window
 set completeopt-=preview
+" don't show doc hover popup
+let g:ycm_auto_hover=''
 " load ycm conf by default
 let g:ycm_confirm_extra_conf=0
 "" don't cache completion items
 let g:ycm_cache_omnifunc=0
 "" complete syntax keywords
 let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_server_python_interpreter = 'python2'
 
 " NERDtree like setup of built in netrw
 let g:netrw_banner = 0
@@ -190,6 +197,6 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " ALE for python and bash
 let b:ale_linters = ['pylint', 'shellcheck']
-"let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
-let g:ale_completion_enabled = 1
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
+" let g:ale_completion_enabled = 1
+" let g:ale_lint_on_text_changed = 'never'
