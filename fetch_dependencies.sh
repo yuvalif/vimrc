@@ -26,7 +26,7 @@ fi
 if [ ! -d  $BASE_DIR/YouCompleteMe ]; then
     cd $BASE_DIR
     git clone https://github.com/Valloric/YouCompleteMe
-    sudo dnf install -y automake gcc gcc-c++ kernel-devel cmake
+    sudo dnf install -y make clang automake gcc gcc-c++ kernel-devel cmake
     sudo dnf install -y go
     sudo dnf install -y python-devel python3-devel
     cd  $BASE_DIR/YouCompleteMe
