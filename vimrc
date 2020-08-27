@@ -177,13 +177,18 @@ nnoremap <F4> :Explore<CR>
 set completeopt-=preview
 " don't show doc hover popup
 let g:ycm_auto_hover=''
+let s:ycm_hover_popup = 0
 " load ycm conf by default
 let g:ycm_confirm_extra_conf=0
-"" don't cache completion items
-let g:ycm_cache_omnifunc=0
+"" cache completion items
+let g:ycm_cache_omnifunc=1
 "" complete syntax keywords
 let g:ycm_seed_identifiers_with_syntax=1
-"let g:ycm_server_python_interpreter = 'python2'
+"" less use of the ID completion engine
+let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_min_num_identifier_candidate_chars = 2
+"" use tags as well
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 " NERDtree like setup of built in netrw
 let g:netrw_banner = 0

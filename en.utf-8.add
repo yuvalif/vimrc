@@ -74,3 +74,4 @@ async
 bufferlist
 cls
 init
+pubsub
