@@ -102,3 +102,14 @@ else
     cd  $BASE_DIR/ale
     git pull
 fi
+
+# dir diff
+
+if [ ! -d  $BASE_DIR/vim-dirdiff ]; then
+    cd $BASE_DIR
+    git clone https://github.com/will133/vim-dirdiff
+else
+    cd  $BASE_DIR/ale
+    git pull
+fi
+

@@ -75,3 +75,9 @@ bufferlist
 cls
 init
 pubsub
+Lua
+Iterable
+lua
+allowlist
+luarocks
+ACL

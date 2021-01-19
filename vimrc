@@ -205,3 +205,18 @@ let b:ale_linters = ['pylint', 'shellcheck']
 let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 " let g:ale_completion_enabled = 1
 " let g:ale_lint_on_text_changed = 'never'
+
+" toggle column 80 mark
+nnoremap <F10> :call Col80Mark()<cr>
+hi ColorColumn guibg=#2d2d2d ctermbg=246
+let s:colset = 0
+function! Col80Mark()
+    if s:colset
+        set colorcolumn=80
+        let s:colset=0
+    else
+        set colorcolumn=0
+        let s:colset=1
+    endif
+endfunction
+
