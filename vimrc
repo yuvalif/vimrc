@@ -116,6 +116,8 @@ set incsearch
 " minibuffer explorer: https://github.com/fholgado/minibufexpl.vim
 nnoremap <F5> :MBEToggle<CR>
 nnoremap <F6> :MBEFocus<CR>
+nnoremap <tab> :MBEbf<CR>
+nnoremap <S-tab> :MBEbb<CR>
 " make sure syntax is on after buffer delete. 
 let g:miniBufExplForceSyntaxEnable = 1
 " have the buffer window on the left
