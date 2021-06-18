@@ -52,6 +52,9 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
+" read instructions fro the file header
+set modeline
+
 set ai "Auto indent
 set si "Smart indent
 
@@ -81,6 +84,9 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep --ignore tags'
 endif
 let g:ackhighlight = 1
+
+" use ninja as the make program
+"set makeprg=ninja
 
 " Open Quickfix window automatically after running :make
 augroup OpenQuickfixWindowAfterMake
@@ -205,13 +211,13 @@ let g:airline#extensions#whitespace#enabled = 0
 " ALE for python and bash
 let b:ale_linters = ['pylint', 'shellcheck']
 let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
-" let g:ale_completion_enabled = 1
-" let g:ale_lint_on_text_changed = 'never'
+let g:ale_completion_enabled = 0
+let g:ale_lint_on_text_changed = 'never'
 
 " toggle column 80 mark
 nnoremap <F10> :call Col80Mark()<cr>
 hi ColorColumn guibg=#2d2d2d ctermbg=246
-let s:colset = 0
+let s:colset = 1
 function! Col80Mark()
     if s:colset
         set colorcolumn=80
@@ -221,4 +227,7 @@ function! Col80Mark()
         let s:colset=1
     endif
 endfunction
+
+" toggle current line highlight
+nnoremap <F11> :ConoLineToggle<cr>
 

@@ -109,7 +109,25 @@ if [ ! -d  $BASE_DIR/vim-dirdiff ]; then
     cd $BASE_DIR
     git clone https://github.com/will133/vim-dirdiff
 else
-    cd  $BASE_DIR/ale
+    cd  $BASE_DIR/vim-dirdiff
+    git pull
+fi
+
+# highlight current line
+
+if [ ! -d  $BASE_DIR/conoline.vim ]; then
+    cd $BASE_DIR
+    git clone https://github.com/miyakogi/conoline.vim
+else
+    cd  $BASE_DIR/conoline.vim
+    git pull
+fi
+
+if [ ! -d  $BASE_DIR/tabnine-vim ]; then
+    cd $BASE_DIR
+    git clone --depth 1 https://github.com/codota/tabnine-vim
+else
+    cd  $BASE_DIR/tabnine-vim
     git pull
 fi
 
