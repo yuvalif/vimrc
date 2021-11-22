@@ -122,3 +122,12 @@ else
     git pull
 fi
 
+# bookmarks
+if [ ! -d  $BASE_DIR/vim-bookmarks ]; then
+    cd $BASE_DIR
+    git clone https://github.com/MattesGroeger/vim-bookmarks.git
+else
+    cd  $BASE_DIR/vim-bookmarks
+    git pull
+fi
+
