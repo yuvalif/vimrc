@@ -231,3 +231,12 @@ endfunction
 " toggle current line highlight
 nnoremap <F11> :ConoLineToggle<cr>
 
+" load local vimrc if exists
+set exrc
+
+" show whitespace charecters
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+noremap <F12> :set list!<CR>
+inoremap <F12> <C-o>:set list!<CR>
+cnoremap <F12> <C-c>:set list!<CR>
+
