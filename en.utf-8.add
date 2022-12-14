@@ -81,3 +81,10 @@ lua
 allowlist
 luarocks
 ACL
+vstart
+RabbitMQ
+AMQP0
+OpaqueData
+cloudevents
+routable
+kafka
