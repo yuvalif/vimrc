@@ -86,7 +86,7 @@ endif
 let g:ackhighlight = 1
 
 " use ninja as the make program
-"set makeprg=ninja
+set makeprg=ninja
 
 " Open Quickfix window automatically after running :make
 augroup OpenQuickfixWindowAfterMake
@@ -171,9 +171,6 @@ set spellfile=$HOME/vimrc/en.utf-8.add
 nnoremap <F9> :set spell!<CR> :syn spell toplevel<CR>
 imap <F9> <C-O><F9>
 
-" always look for all tags using c-[
-nmap <C-]> g<C-]>
-
 " search up for tags file
 set tags=./tags;/
 
@@ -197,6 +194,9 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_min_num_identifier_candidate_chars = 2
 "" use tags as well
 let g:ycm_collect_identifiers_from_tags_files = 1
+" use ycm instead of ctags to jump to and back
+nnoremap <C-]> :YcmCompleter GoTo<CR>
+nnoremap <C-t> <C-o>
 
 " NERDtree like setup of built in netrw
 let g:netrw_banner = 0
@@ -239,4 +239,5 @@ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 noremap <F12> :set list!<CR>
 inoremap <F12> <C-o>:set list!<CR>
 cnoremap <F12> <C-c>:set list!<CR>
+set backspace=indent,eol,start
 
