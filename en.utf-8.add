@@ -88,3 +88,6 @@ OpaqueData
 cloudevents
 routable
 kafka
+backoff
+eTag
+hardcoded
