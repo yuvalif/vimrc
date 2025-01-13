@@ -131,3 +131,12 @@ else
     git pull
 fi
 
+# trailing whitespace
+if [ ! -d  $BASE_DIR/trailertrash ]; then
+    cd $BASE_DIR
+    git clone https://github.com/csexton/trailertrash.vim
+else
+    cd  $BASE_DIR/trailertrash
+    git pull
+fi
+
