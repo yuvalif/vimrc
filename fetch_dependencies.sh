@@ -39,7 +39,7 @@ fi
 
 # build YCM
 # TODO: only if newly cloned or git pull updated anything
-./install.py --clang-completer --go-completer
+./install.py --clangd-completer --go-completer
 
 # YCM generator
 if [ ! -d  $BASE_DIR/YCM-Generator ]; then

@@ -52,6 +52,13 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
+" keep these definitions for python as well
+augroup python
+    autocmd!
+    " Add shiftwidth and/or softtabstop if you want to override those too.
+    autocmd FileType python setlocal shiftwidth=2 tabstop=2
+augroup end
+
 " read instructions fro the file header
 set modeline
 
@@ -185,11 +192,11 @@ let g:ycm_auto_hover=''
 let s:ycm_hover_popup = 0
 " load ycm conf by default
 let g:ycm_confirm_extra_conf=0
-"" cache completion items
+" cache completion items
 let g:ycm_cache_omnifunc=1
-"" complete syntax keywords
+" complete syntax keywords
 let g:ycm_seed_identifiers_with_syntax=1
-"" less use of the ID completion engine
+" less use of the ID completion engine
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_min_num_identifier_candidate_chars = 2
 "" use tags as well
