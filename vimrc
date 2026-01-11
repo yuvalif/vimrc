@@ -3,6 +3,56 @@
 " Copyright: Amir Salihefendic http://amix.dk - amix@amix.dk
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Management - vim-plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Install vim-plug if not already installed
+let data_dir = '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  augroup PlugInstallGroup
+    autocmd!
+    autocmd VimEnter * PlugInstall --sync
+  augroup END
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" C++ development
+Plug 'derekwyatt/vim-fswitch'
+
+" Buffer management
+Plug 'fholgado/minibufexpl.vim'
+
+" Completion - with post-install hook
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clangd-completer --go-completer' }
+Plug 'rdnetto/YCM-Generator'
+
+" Git integration
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" UI enhancements
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'miyakogi/conoline.vim'
+
+" Search and navigation
+Plug 'mileszs/ack.vim'
+Plug 'MattesGroeger/vim-bookmarks'
+
+" Code quality
+Plug 'dense-analysis/ale'
+
+" Utilities
+Plug 'will133/vim-dirdiff'
+Plug 'csexton/trailertrash.vim'
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=200
 
@@ -185,6 +235,8 @@ set tags=./tags;/
 nnoremap <F4> :Explore<CR>
 
 " YCM conf
+" use system clangd instead of bundled version
+let g:ycm_clangd_binary_path = '/usr/bin/clangd'
 " prevent YCM preview window
 set completeopt-=preview
 " don't show doc hover popup
@@ -202,7 +254,7 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 "" use tags as well
 let g:ycm_collect_identifiers_from_tags_files = 1
 " use ycm instead of ctags to jump to and back
-nnoremap <C-]> :YcmCompleter GoTo<CR>
+nnoremap <C-]> :YcmCompleter GoToImprecise<CR>
 nnoremap <C-t> <C-o>
 
 " NERDtree like setup of built in netrw

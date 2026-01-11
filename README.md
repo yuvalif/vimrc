@@ -5,11 +5,12 @@ my vimrc (work in progress...)
  ```bash
  git clone https://github.com/yuvalif/vimrc.git
  ```
- - get plugins (need to be sudo/root for some of them):
+ - get system dependencies for plugins (need to be sudo/root):
  ```bash
  cd vimrc
  ./fetch_dependencies.sh
  ```
+ - open vim and run `:PlugInstall` to install plugins
  - symlink vimrc:
  ```bash
  cd ~
