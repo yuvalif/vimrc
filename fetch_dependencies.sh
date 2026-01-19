@@ -1,13 +1,19 @@
-#!/bin/bash
+#!/bin/zsh
 
 # System dependencies for vim plugins (for DNF-based systems)
 # Plugins themselves are managed by vim-plug (see vimrc)
 
 echo "Installing system dependencies..."
 
+# YouCompleteMe build dependencies
+sudo dnf install -y make clang automake gcc gcc-c++ cmake go cargo
+
+# Clangd - language server for C/C++
+sudo dnf install -y clang-tools-extra
+
 # Python >= 3.12 - required by YouCompleteMe
 # Check if default python3 is >= 3.12, otherwise install python3.12 explicitly
-PYTHON_VERSION=$(dnf info python3 2>/dev/null | grep "^Version" | head -1 | awk '{print $3}')
+PYTHON_VERSION=$(dnf info -y python3 2>/dev/null | grep "^Version" | head -1 | awk '{print $3}')
 PYTHON_MAJOR=$(echo "$PYTHON_VERSION" | cut -d. -f1)
 PYTHON_MINOR=$(echo "$PYTHON_VERSION" | cut -d. -f2)
 
@@ -18,13 +24,9 @@ else
     echo "Default python3 is version $PYTHON_VERSION (< 3.12), installing python3.12 explicitly"
     sudo dnf install -y python3.12 python3.12-devel
     sudo dnf install -y python3.12-pip
+    cd ~/.vim/plugged/YouCompleteMe && python3.12 install.py --clangd-completer --rust-completer --go-completer
 fi
 
-# YouCompleteMe build dependencies
-sudo dnf install -y make clang automake gcc gcc-c++ cmake go
-
-# Clangd - language server for C/C++
-sudo dnf install -y clang-tools-extra
 
 # Search tools - used by ack.vim
 sudo dnf install -y ack the_silver_searcher
